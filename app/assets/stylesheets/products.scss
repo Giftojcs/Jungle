@@ -30,6 +30,14 @@ main section.categories-show {
         border-radius: 0.25rem;
       }
 
+      .products-index .sold-out-badge {
+  background-color: red !important;
+  color: white !important;
+  padding: 5px 10px !important;
+  border-radius: 5px !important;
+}
+
+
       a {
         text-decoration: none;
       }

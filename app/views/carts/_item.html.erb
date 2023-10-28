@@ -1,6 +1,9 @@
 <tr>
   <td>
     <%= image_tag product.image.tiny.url %>
+    <% if product.quantity == 0 %>
+      <span class="sold-out-badge">Sold Out</span>
+    <% end %>
   </td>
   <td>
     <h4><%= product.name %></h4>
@@ -12,12 +15,20 @@
   </td>
   <td>
     <div>
-    <%= button_to remove_item_cart_path(product_id: product.id), class: 'btn btn-xs btn-danger' do %> - <% end %>
-    <%= quantity %>
-    <%= button_to add_item_cart_path(product_id: product.id), class: 'btn btn-xs btn-success' do %> + <% end %>
+      <% if product.quantity > 0 %>
+        <%= button_to remove_item_cart_path(product_id: product.id), class: 'btn btn-xs btn-danger' do %> - <% end %>
+        <%= quantity %>
+        <%= button_to add_item_cart_path(product_id: product.id), class: 'btn btn-xs btn-success' do %> + <% end %>
+      <% else %>
+        <p class="sold-out-message">Sold Out</p>
+      <% end %>
     </div>
   </td>
   <td>
-    <%= product.price * quantity %>
+    <% if product.quantity > 0 %>
+      <%= product.price * quantity %>
+    <% else %>
+      <p class="sold-out-message">N/A</p>
+    <% end %>
   </td>
 </tr>

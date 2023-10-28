@@ -34,6 +34,8 @@ cat3 = Category.find_or_create_by! name: 'Trees'
 puts "Re-creating Products ..."
 
 Product.destroy_all
+Product.create(name: 'Product Name', quantity: 0, price: 19.99, description: 'Product description')
+
 
 cat1.products.create!({
   name:  'Giant Tea',
