@@ -1,5 +1,6 @@
 require_relative "boot"
-
+require 'dotenv'
+Dotenv.load
 require "rails/all"
 
 # Require the gems listed in Gemfile, including any gems
@@ -10,6 +11,9 @@ module New
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.1
+
+    # Add your custom middleware for Basic Authentication
+    #config.middleware.insert_before ActionDispatch::Static, BasicAuthMiddleware
 
     # Configuration for the application, engines, and railties goes here.
     #
