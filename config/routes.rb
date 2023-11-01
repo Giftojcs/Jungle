@@ -1,6 +1,16 @@
 Rails.application.routes.draw do
 
+  get 'about/index'
   root to: 'products#index'
+
+  get '/signup', to: 'users#new'
+  post '/signup', to: 'users#create'
+  get '/login', to: 'sessions#new'
+  post '/login', to: 'sessions#create'
+  
+  delete '/logout', to: 'sessions#destroy', as: 'logout'
+
+  get 'about', to: 'about#index', as: 'about'
   #get '/' => 'products#index'
   #get '/' => { controller: 'products', action: 'index '}
 
@@ -11,7 +21,11 @@ Rails.application.routes.draw do
     post   :add_item
     post   :remove_item
   end
-
+  
+  namespace :admin do
+    resources :categories, only: [:index, :new, :create]
+  end
+  
   resources :orders, only: [:create, :show]
 
   namespace :admin do
@@ -22,6 +36,7 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :categories
   end
+  
   
 
   # The priority is based upon order of creation: first created -> highest priority.

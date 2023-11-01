@@ -27,15 +27,18 @@ class OrdersController < ApplicationController
   end
 
   def perform_stripe_charge
-    if cart_subtotal_cents > 100
-      raise Stripe::InvalidRequestError.new("Cart subtotal must be greater than or equal to 1 cent.", 400)
+    cart_total_cents = cart_subtotal_cents
+    puts "Cart Subtotal (cents): #{cart_total_cents}" # Add this line for debugging
+  if cart_subtotal_cents < 100
+    raise Stripe::InvalidRequestError.new("Cart subtotal must be greater than or equal to 1 cent.", 400)
     end
 
     Stripe::Charge.create(
-      source:      params[:stripeToken],
+      source: params[:stripeToken],
       amount:      cart_subtotal_cents,
       description: "Khurram Virani's Jungle Order",
       currency:    'cad'
+      
     )
 
   end
